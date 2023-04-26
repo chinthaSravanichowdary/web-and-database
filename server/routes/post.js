@@ -5,9 +5,9 @@ const router=express.Router();
 
 router.post('/',async (req,res)=>{
     try{
-        const notes = await Note.getpost(req.body);
-        console.log(notes);
-        res.send(notes);
+        const post = await Note.getpost(req.body);
+        console.log(post);
+        res.send(post);
     }catch(err){
         res.status(401).send({message: err.message});
     }

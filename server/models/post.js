@@ -13,7 +13,7 @@ const posts = [
         postId:"2345",
         subject:".........thats it",
         postlocation:"......."
-    },
+    }
 
 ];
 

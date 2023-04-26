@@ -10,3 +10,15 @@ router.get('/',async(req,res)=>{
         res.status(401).send({message: err.message});
     }
 })
+router.post('/login', async (req, res) => {
+    try {
+      console.log(req.body)
+      let user = User.login(req.body); 
+      res.send({...user, password: undefined})
+    } catch(err) {
+      res.status(401).send({message: err}) 
+    }
+  })
+  
+  module.exports = router;
+  

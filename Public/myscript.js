@@ -1,8 +1,8 @@
 class User
 {
-     constructor( username , Email, Password) {
+     constructor(username, Email,Password) {
      this.Username = username ;
-     this.Username = Email;
+     this.UserMail = Email;
       
      this.UserPassword = Password;
      }
@@ -103,10 +103,26 @@ function login(e) {
      let username = document.getElementById("username").value
      let pswd = document.getElementById("pswd").value
      let mail = document.getElementById("mail").value
-     let user1 = new User( username, pswd ,mail )
+     let user1 = new User(username, mail, pswd)
      console.log(user1)
+// make fetch call here!
+ /*
+    {
+      userName: "cathy123",
+      mail:savanth
+      password: "icecream"
+    }
+  */
+    fetchData('/users/login', user, "POST")
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+  }
+    
 
-}
 
 
 
@@ -125,6 +141,25 @@ function post(e){
      // let post2 = new Post(artname, fullname, subject)
      console.log(post1)
 }
-
+// Fetch method implementation:
+async function fetchData(route = '', data = {}, methodType) {
+     const response = await fetch(`http://localhost:3000${route}`, {
+       method: methodType, // *POST, PUT, DELETE, etc.
+       mode: 'cors', // no-cors, *cors, same-origin
+       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+       credentials: 'same-origin', // include, *same-origin, omit
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       redirect: 'follow', // manual, *follow, error
+       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+       body: JSON.stringify(data) // body data type must match "Content-Type" header
+     });
+     if(response.ok) {
+       return await response.json(); // parses JSON response into native JavaScript objects
+     } else {
+       throw await response.json();
+     }
+   } 
 
 
