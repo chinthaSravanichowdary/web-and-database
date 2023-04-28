@@ -1,3 +1,11 @@
+let getBtn = document.getElementById("btn-users");
+ if(getBtn) getBtn.addEventListener('click',getAllUsers);
+function getAllUsers(){
+    fetch("http://localhost:3000/users/test")
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err))
+}
 class User
 {
      constructor(username, Email,Password) {
@@ -113,7 +121,7 @@ function login(e) {
       password: "icecream"
     }
   */
-    fetchData('/users/login', user, "POST")
+    fetchData('/users/login', user1, "POST")
     .then(data => {
       console.log(data);
     })
